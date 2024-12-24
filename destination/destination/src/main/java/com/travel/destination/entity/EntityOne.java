@@ -15,7 +15,7 @@ public class EntityOne {
     private Long touristID;
     private  String touristName;
     private String  touristplaces;
-    private  int Age;
+    private  Integer Age;
 
     private  boolean isActive;
     private  String createdBy;

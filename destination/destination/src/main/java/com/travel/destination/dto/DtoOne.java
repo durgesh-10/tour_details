@@ -1,5 +1,6 @@
 package com.travel.destination.dto;
 
+import jakarta.persistence.Column;
 import lombok.Data;
 
 import java.time.LocalDateTime;
@@ -9,7 +10,8 @@ public class DtoOne {
     private Long touristID;
     private  String touristName;
     private String  touristplaces;
-    private  int Age;
+    @Column(nullable = false)
+    private Integer age;
 
     private  boolean isActive;
     private  String createdBy;

@@ -5,10 +5,7 @@ import com.travel.destination.entity.EntityOne;
 import com.travel.destination.service.ServiceOne;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import static org.springframework.http.HttpStatus.CREATED;
 
@@ -20,8 +17,19 @@ public class ControllerOne {
     ServiceOne serviceOne;
 
     @PostMapping("/addData")
-    public ResponseEntity<EntityOne>addData(@RequestBody DtoOne dtoOne){
-        return new ResponseEntity<>(serviceOne.addData(dtoOne),CREATED);
+    public ResponseEntity<EntityOne> addData(@RequestBody DtoOne dtoOne) {
+        return new ResponseEntity<>(serviceOne.addData(dtoOne), CREATED);
     }
 
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<String> deleteTourist(@PathVariable Long id) {
+        serviceOne.deleteData(id);
+        return ResponseEntity.ok("Tourist deleted successfully");
+    }
+
+    @PutMapping("/update/{id}")
+    public ResponseEntity<EntityOne> updateTourist(@PathVariable Long id, @RequestBody DtoOne dtoOne) {
+        EntityOne updatedTourist = serviceOne.updateData(id, dtoOne);
+        return ResponseEntity.ok(updatedTourist);
+    }
 }

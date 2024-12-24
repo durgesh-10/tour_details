@@ -17,7 +17,6 @@ public class ServiceOne {
 
         EntityOne one = new EntityOne();
 
-        one.setTouristID(dtoOne.getTouristID());
         one.setTouristName(dtoOne.getTouristName());
         one.setTouristplaces(dtoOne.getTouristplaces());
         one.setAge(dtoOne.getAge());
@@ -31,4 +30,24 @@ public class ServiceOne {
         return repositoryOne.save(one);
 
     }
+    public void deleteData(Long id) {
+        if (!repositoryOne.existsById(id)) {
+            throw new RuntimeException("Tourist with ID " + id + " does not exist.");
+        }
+        repositoryOne.deleteById(id);
+    }
+
+    public EntityOne updateData(Long id, DtoOne dtoOne) {
+        EntityOne existingTourist = repositoryOne.findById(id)
+                .orElseThrow(() -> new RuntimeException("Tourist with ID " + id + " not found."));
+
+        existingTourist.setTouristName(dtoOne.getTouristName());
+        existingTourist.setTouristplaces(dtoOne.getTouristplaces());
+        existingTourist.setAge(dtoOne.getAge());
+        existingTourist.setUpdatedBy(dtoOne.getUpdatedBy());
+        existingTourist.setUpdatedDate(dtoOne.getUpdatedDate());
+
+        return repositoryOne.save(existingTourist);
+    }
+
 }

@@ -7,6 +7,8 @@ import com.travel.destination.repository.RepositoryOne;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ServiceOne {
 
@@ -48,6 +50,10 @@ public class ServiceOne {
         existingTourist.setUpdatedDate(dtoOne.getUpdatedDate());
 
         return repositoryOne.save(existingTourist);
+    }
+
+    public List<EntityOne> getAllTourists() {
+        return repositoryOne.findAll();
     }
 
 }

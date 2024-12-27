@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 import static org.springframework.http.HttpStatus.CREATED;
 
 @RestController
@@ -32,4 +34,12 @@ public class ControllerOne {
         EntityOne updatedTourist = serviceOne.updateData(id, dtoOne);
         return ResponseEntity.ok(updatedTourist);
     }
+
+    @GetMapping("/getAllTourists")
+    public ResponseEntity<List<EntityOne>> getAllTourists() {
+        List<EntityOne> tourists = serviceOne.getAllTourists();
+        return ResponseEntity.ok(tourists);
+    }
+
+
 }
